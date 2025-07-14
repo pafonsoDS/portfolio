@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedro Afonso | Data Science Portfolio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --primary-color: #161b22;
+            --secondary-color: #21262d;
+            --border-color: #30363d;
+            --text-color: #c9d1d9;
+            --header-color: #f0f6fc;
+            --accent-color: #58a6ff;
+            --accent-glow: rgba(88, 166, 255, 0.5);
+        }
+
+        /* --- Base & Scrollbar --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--primary-color); }
+        ::-webkit-scrollbar-thumb { background-color: var(--border-color); border-radius: 10px; }
+
+        /* --- Particles.js Background --- */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            background: rgba(13, 17, 23, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 1px;
+            padding: 5px 0;
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-links a:hover {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        /* --- General Section Styling --- */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 5% 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3rem;
+            color: var(--header-color);
+            margin-bottom: 4rem;
+            text-align: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+        }
+
+        /* --- About Me Section --- */
+        #about { text-align: center; }
+        .about-content h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 5rem;
+            color: var(--header-color);
+        }
+        .about-content .subtitle {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        .about-content p {
+            max-width: 700px;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+        }
+        .social-links-about a {
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+        .social-links-about a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Projects Section --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .project-card {
+            background: var(--primary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+        .project-card h3 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            color: var(--header-color);
+            margin-bottom: 1rem;
+        }
+        .project-card p {
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+        }
+        .tech-tags { margin-bottom: 1.5rem; }
+        .tech-tags span {
+            display: inline-block;
+            font-size: 0.8rem;
+            background: var(--secondary-color);
+            color: var(--accent-color);
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 0 5px 5px 0;
+        }
+        .project-btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .project-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        /* --- Interests Section --- */
+        .interests-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            max-width: 1000px;
+        }
+        .interest-item {
+            background-color: var(--primary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            width: 220px;
+            transition: transform 0.3s;
+        }
+        .interest-item:hover {
+            transform: translateY(-5px);
+        }
+        .interest-item svg {
+            width: 50px;
+            height: 50px;
+            fill: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+        .interest-item h3 {
+            font-family: 'Oswald', sans-serif;
+            color: var(--header-color);
+            font-size: 1.2rem;
+        }
+
+        /* --- Misc/Contact Section --- */
+        #misc { text-align: center; }
+        #misc p {
+            max-width: 600px;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .contact-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .contact-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--accent-glow);
+        }
+        
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 768px) {
+            .about-content h1 { font-size: 3rem; }
+            .nav-links { gap: 1.5rem; font-size: 0.9rem; }
+            .section { padding: 80px 5% 40px; }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#interests">Interests</a></li>
+            <li><a href="#misc">Misc</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- About Section - Set to visible by default -->
+        <section id="about" class="section visible">
+            <div class="about-content">
+                <h1>PEDRO AFONSO</h1>
+                <p class="subtitle">Data Scientist & Chess Enthusiast</p>
+                <p>A Data Science Master's student passionate about building practical AI applications. My project portfolio demonstrates strong problem-solving and rapid prototyping skills using Python and PyTorch in fields like LLMs, cheat detection, and computer vision. I am driven to apply my technical abilities to build cutting-edge technologies that will shape the future of the game.</p>
+                <div class="social-links-about">
+                    <a href="https://github.com/your-github-username" target="_blank">GITHUB</a>
+                    <a href="https://linkedin.com/in/your-linkedin-profile" target="_blank">LINKEDIN</a>
+                    <a href="https://www.youtube.com/@PetroVICI315" target="_blank">YOUTUBE</a>
+                    <a href="mailto:up201907366@up.pt">EMAIL</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <h2 class="section-title">PROJECTS</h2>
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <h3>Chess Anti-Cheating System</h3>
+                    <p>A system to detect non-human play in online chess by statistically analyzing move patterns against engine recommendations.</p>
+                    <div class="tech-tags">
+                        <span>Python</span><span>Pandas</span><span>Bayesian Inference</span><span>Stockfish</span>
+                    </div>
+                    <a href="#" class="project-btn">View on GitHub</a>
+                </div>
+                
+                <div class="project-card">
+                    <h3>LAIDA</h3>
+                    <p>An AI-driven lie detection system that analyzes micro-expressions from video streams using computer vision.</p>
+                    <div class="tech-tags">
+                        <span>Python</span><span>PyTorch</span><span>OpenCV</span><span>Computer Vision</span>
+                    </div>
+                    <a href="#" class="project-btn">View on GitHub</a>
+                </div>
+                
+                <div class="project-card">
+                    <h3>Social Manager Pro</h3>
+                    <p>An automation bot using Computer Vision to manage and grow social media accounts by simulating human interaction.</p>
+                    <div class="tech-tags">
+                        <span>Python</span><span>OpenCV</span><span>Automation</span><span>GUI</span>
+                    </div>
+                    <a href="#" class="project-btn">View on GitHub</a>
+                </div>
+                
+                <div class="project-card">
+                    <h3>AveiroBuddy</h3>
+                    <p>LLM providing tailored, realtime city information. Awarded 2nd Place at Hack-A-City Aveiro.</p>
+                    <div class="tech-tags">
+                        <span>LLM</span><span>APIs</span><span>Realtime Data</span><span>Hackathon</span>
+                    </div>
+                    <a href="#" class="project-btn">View on GitHub</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Interests Section -->
+        <section id="interests" class="section">
+            <h2 class="section-title">INTERESTS</h2>
+            <div class="interests-grid">
+                
+                <div class="interest-item">
+                    <svg viewBox="0 0 24 24"><path d="M22,10,20.6,8.6,18,11.2V5H16V13.3L12.4,9.7,14,8.1,12,6,8,10,9.6,11.6,12,9.2V18H14V11.2l2.6,2.6,1.4-1.4L15.4,10H18v.8l2.6-2.6L22,9.6V10M7.5,12A2.5,2.5,0,0,0,10,9.5,2.5,2.5,0,0,0,7.5,7,2.5,2.5,0,0,0,5,9.5,2.5,2.5,0,0,0,7.5,12M4.6,15.2,4,18H6.8l.6-2.8A4.5,4.5,0,0,1,4.6,15.2Z"></path></svg>
+                    <h3>Competitive Chess</h3>
+                </div>
+                
+                <div class="interest-item">
+                    <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"></path></svg>
+                    <h3>Hackathons</h3>
+                </div>
+                
+                <div class="interest-item">
+                    <svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,6A2,2 0 0,0 10,8A2,2 0 0,0 12,10A2,2 0 0,0 14,8A2,2 0 0,0 12,6M20,13C20,15.2 16.4,17 12,17C7.6,17 4,15.2 4,13C4,11.5 5.5,10.2 8,9.2V17H10V15H14V17H16V9.2C18.5,10.2 20,11.5 20,13Z"></path></svg>
+                    <h3>Memory & Learning</h3>
+                </div>
+                
+                <div class="interest-item">
+                     <svg viewBox="0 0 24 24"><path d="M18.5,5.5C19.88,5.5 21,6.62 21,8V16C21,17.38 19.88,18.5 18.5,18.5H16V21H14V18.5H10V21H8V18.5H5.5C4.12,18.5 3,17.38 3,16V8C3,6.62 4.12,5.5 5.5,5.5H8V3H10V5.5H14V3H16V5.5H18.5M18.5,7.5H5.5C5,7.5 4.5,8 4.5,8.5V15.5C4.5,16 5,16.5 5.5,16.5H18.5C19,16.5 19.5,16 19.5,15.5V8.5C19.5,8 19,7.5 18.5,7.5Z"></path></svg>
+                    <h3>Fitness & Exercise</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Misc Section -->
+        <section id="misc" class="section">
+            <h2 class="section-title">GET IN TOUCH</h2>
+            <p>I'm always excited to connect with fellow developers, chess players, and innovators. If you'd like to talk about a project, a chess position, or anything in between, feel free to reach out.</p>
+            <a href="mailto:up201907366@up.pt" class="contact-btn">Say Hello</a>
+        </section>
+    </main>
+    
+    <!-- JS Libraries -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <!-- Custom App Logic -->
+    <script>
+        // --- Particles.js Configuration ---
+        document.addEventListener('DOMContentLoaded', function () {
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": { "value": 60, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": "#30363d" },
+                    "shape": { "type": "circle" },
+                    "opacity": { "value": 0.5, "random": true },
+                    "size": { "value": 2, "random": true },
+                    "line_linked": { "enable": true, "distance": 150, "color": "#58a6ff", "opacity": 0.1, "width": 1 },
+                    "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": false }, "resize": true },
+                    "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.3 } } }
+                },
+                "retina_detect": true
+            });
+        });
+
+        // --- Intersection Observer for Scroll Animations ---
+        const sections = document.querySelectorAll('.section');
+        // The first section is visible by default, so we observe the rest
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Optional: stop observing once visible
+                }
+            });
+        }, {
+            threshold: 0.15 // A bit more of the element needs to be visible
+        });
+        
+        sections.forEach((section, index) => {
+            // We've already made the first section visible, so we don't need to observe it.
+            if (index > 0) {
+                 observer.observe(section);
+            }
+        });
+        
+    </script>
+</body>
+</html>
