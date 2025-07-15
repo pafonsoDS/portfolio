@@ -1,2 +1,2 @@
-# portfolio
-Personal portfolio @ pafonso.dev
+# Personal Portfolio
+Available @ pafonso.dev
