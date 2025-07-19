@@ -81,13 +81,16 @@ document.addEventListener('DOMContentLoaded', function () {
         sortedSkills.forEach(([skill, rating]) => {
             const finalRating = Math.max(0, Math.min(10, rating)); // Ensure rating is between 0 and 10
 
+            // Format rating: show decimal only if it's not a whole number
+            const displayRating = finalRating % 1 === 0 ? finalRating : finalRating.toFixed(1);
+
             const skillElement = document.createElement('div');
             skillElement.classList.add('tech-skill');
 
             skillElement.innerHTML = `
                 <h3>
                     ${skill}
-                    <span class="skill-rating">${finalRating.toFixed(1)} / 10</span>
+                    <span class="skill-rating">${displayRating} / 10</span>
                 </h3>
                 <div class="skill-bar">
                     <div class="skill-progress" data-width="${finalRating * 10}%"></div>
