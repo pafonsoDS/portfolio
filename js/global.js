@@ -65,11 +65,8 @@ document.addEventListener('DOMContentLoaded', function () {
         "Unsloth": 7,
         "Flask": 7,
         "SQL": 7,
-        "HTML": 6.5,
-        "CSS": 6.5, 
+        "HTML": 6,
         "Django": 6.5,
-        "JS": 6,
-        "Rust": 6,
         "Flutter": 6,
         "Firebase": 6,
     };
