@@ -433,3 +433,13 @@ body {
     position: relative;         /* Allows us to nudge the element */
     left: 142px;                 /* Nudges it 20px to the right from its center position */
 }
+
+
+/*interest padding*/
+.section-description {
+    text-align: center;
+    margin: -1.5rem 0 2.5rem 0; /* Uses negative margin to pull it closer to the title */
+    font-size: 1.1rem;
+    font-weight: 300; /* Lighter font weight */
+    color: #ccc; /* A soft, light gray color */
+}
