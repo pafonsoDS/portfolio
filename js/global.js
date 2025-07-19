@@ -114,4 +114,38 @@ document.addEventListener('DOMContentLoaded', function () {
             skillObserver.observe(skillItem);
         });
     }
-});
+
+    // =================================================
+    // NEW CODE: VIDEO MODAL LOGIC FOR INTEREST PAGES
+    // =================================================
+    const openModalBtn = document.getElementById('open-video-btn');
+    const videoModal = document.getElementById('video-modal');
+    
+    // Check if the button and modal exist on the current page to prevent errors
+    if (openModalBtn && videoModal) {
+        const closeModalBtn = videoModal.querySelector('.modal-close-btn');
+        const modalOverlay = videoModal.querySelector('.modal-overlay');
+        const videoIframe = videoModal.querySelector('iframe');
+        const videoSrc = videoIframe.getAttribute('data-src');
+
+        const openModal = () => {
+            videoIframe.setAttribute('src', videoSrc);
+            videoModal.classList.add('active');
+        };
+
+        const closeModal = () => {
+            videoModal.classList.remove('active');
+            // Stop the video from playing in the background by clearing the src
+            videoIframe.setAttribute('src', ''); 
+        };
+
+        openModalBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent the link from navigating
+            openModal();
+        });
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', closeModal);
+    }
+    
+}); // This is the closing bracket and parenthesis for the main DOMContentLoaded listener

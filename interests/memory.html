@@ -32,14 +32,61 @@
 
         <section class="posts-section">
             <h2 class="section-title">POSTS & HIGHLIGHTS</h2>
-            <div class="posts-container">
-                <p class="coming-soon-text">Coming very soon!</p>
+            <div class="posts-grid">
+
+                <!-- Your First Real Post -->
+                <div class="post-card">
+                    <div class="post-thumbnail">
+                        <img src="../assets/img/thumb1280x720.png" alt="Thumbnail for Pi Memory Challenge Video">
+                    </div>
+                    <div class="post-content">
+                        <p class="post-intro">
+                            Who would have thought I'd recite Pi in a festival? (Queima das Fitas Porto 2025)
+                        </p>
+                        <!-- NEW button and icon container -->
+                        <div class="post-actions">
+                            <!-- Disabled button with tooltip -->
+                            <div class="disabled-btn-wrapper">
+                                <a href="#" class="post-btn-details disabled-btn">View more details</a>
+                                <span class="tooltip-text">Coming very soon!</span>
+                            </div>
+                            <!-- YouTube icon to open modal -->
+                            <a href="#" class="post-btn-youtube" id="open-video-btn" aria-label="Watch Video">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Invisible Placeholder Card 1 -->
+                <div class="post-card" style="visibility: hidden;"></div>
+
+                <!-- Invisible Placeholder Card 2 -->
+                <div class="post-card" style="visibility: hidden;"></div>
+
             </div>
         </section>
     </main>
+
+    <!-- NEW Video Modal -->
+    <div class="modal" id="video-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close-btn" aria-label="Close video modal">×</button>
+            <div class="modal-body">
+                <iframe 
+                    src=""
+                    data-src="https://www.youtube.com/embed/Eub-RfeeUwo?autoplay=1&rel=0"
+                    title="YouTube Video Player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
     
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
     <script src="../js/global.js"></script>
 </body>
-</html> 
+</html>
