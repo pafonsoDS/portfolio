@@ -240,6 +240,11 @@ body {
     font-size: 1.2rem;
 }
 
+/*Custom Icon Color for Memory Challenges*/
+#memory-icon {
+    color: #FFD700; /* This is a standard hex code for gold */
+}
+
 /* --- Misc/Contact Section --- */
 #misc { text-align: center; }
 #misc p {

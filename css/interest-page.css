@@ -130,3 +130,112 @@
     display: block; /* This is the key: it forces each span onto a new line */
     line-height: 1.4; /* Adjusts the spacing between the lines */
 }
+
+
+/* =================================================
+   NEW STYLES FOR POST CARDS & VIDEO MODAL
+   ================================================= */
+
+/* Container for the button and icon */
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto; /* Pushes this container to the bottom */
+}
+
+/* Overriding the button color to be less vivid */
+.post-btn-details {
+    background-color: #d04a20; /* A less vivid orange */
+}
+.post-btn-details:hover {
+    background-color: #e8491d; /* Original color on hover for feedback */
+}
+
+/* Style for the new YouTube icon button */
+.post-btn-youtube {
+    font-size: 2.2rem; /* Larger icon size */
+    color: #ddd;
+    transition: color 0.3s, transform 0.3s;
+}
+.post-btn-youtube:hover {
+    color: #ff0000; /* YouTube red on hover */
+    transform: scale(1.1);
+}
+
+
+/* --- Video Modal Styles --- */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.3s, opacity 0.3s ease;
+}
+.modal.active {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.3s ease;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    cursor: pointer;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #0d1117;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 960px; /* Max width for the video player */
+    z-index: 2001;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.modal.active .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2.5rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.modal-body {
+    /* Creates a responsive 16:9 container for the iframe */
+    position: relative;
+    padding-bottom: 56.25%; 
+    height: 0;
+    overflow: hidden;
+}
+
+.modal-body iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+}
